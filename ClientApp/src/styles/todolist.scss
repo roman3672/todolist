@@ -1,0 +1,22 @@
+
+
+.todolist{
+  &-empty{
+    text-align: center;
+  }
+  &-actual{
+    position: relative;
+  }
+  &-marked{
+    margin-top: 40px;
+  }
+}
+
+.spinner-loader{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  z-index: 1;
+}

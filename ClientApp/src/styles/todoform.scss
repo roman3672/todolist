@@ -1,0 +1,51 @@
+textarea:focus, input:focus{
+    outline: none;
+}
+
+button{
+    border: 1px solid #ccc;
+}
+
+.todo-form{
+    padding-bottom: 50px;
+}
+
+.text{
+    width: 70%;
+    font-size: 20px;
+    border: none;
+    outline: 1px solid #ccc;
+    padding-left: 10px;
+    &:focus{
+        outline: 1px solid #ccc ;
+    }
+}
+
+button{
+    height: 50px;
+}
+
+.form-container{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input{
+        height: 50px;
+    }
+    .btn{
+        margin-left: 10px;
+        padding: 1px 10px;
+        outline: 1px solid #ccc;
+    }
+}
+
+.react-datetime-picker__wrapper{
+    margin-left: 10px;
+    border: none;
+    border-radius: 0.25rem;
+    outline: 1px solid #ccc;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}

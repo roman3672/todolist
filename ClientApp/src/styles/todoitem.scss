@@ -1,0 +1,63 @@
+.todo-item{
+    width: 90%;
+    margin: 10px auto;
+    height: 40px;
+    outline: 1px solid #ccc;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: space-between;
+    &_edit{
+        background: rgba(245, 245, 245, 0.64);
+    }
+    &_done{
+        background: rgba(245, 245, 245, 0.64);
+        color: #6c6c6c;
+        input{
+            background: rgba(245, 245, 245, 0.64);
+            color: #6c6c6c;
+        }
+    }
+}
+
+.buttons{
+    height: 90%;
+    display: flex;
+    align-items: center;
+    
+    p{
+        padding-right: 10px;
+        text-align: left;
+        font-size: 14px;
+        span{
+            font-weight: 600;
+        }
+    }
+    
+    .btn{
+        margin: 0 5px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.title{
+    border: none;
+    outline: none;
+    padding: 5px 6px; 
+    &_edit{
+        width: max-content;
+        outline: 1px solid #ccc;
+        border-radius: 0.25rem;
+        &:focus{
+            outline: 1px solid blue;
+            border-radius: 0.25rem;
+        }
+    }
+}
+
+.edit-buttons{
+    display: flex;
+}
