@@ -13,6 +13,7 @@ namespace todolist.Controllers{
         public TodosController(DataContext dbContext)
         {
             _dbContext = dbContext;
+            dbContext.Database.Migrate(); // automatic migration on start
         }
 
         [HttpGet]
@@ -64,7 +65,6 @@ namespace todolist.Controllers{
 
             if (selectedTodo != null)
             {
-                
                 selectedTodo.IsDone = todo.IsDone;
                 
                 await _dbContext.SaveChangesAsync();

@@ -10,9 +10,9 @@ builder.Services.AddDbContext<DataContext>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        builder =>
+        corsBuilder =>
         {
-            builder.AllowAnyOrigin()
+            corsBuilder.AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });

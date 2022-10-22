@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/todolist.scss'
 import { Container } from 'reactstrap';
 import { ITodo } from '../interfaces';
@@ -28,7 +28,6 @@ const TodoList = () => {
           setLoader(false)
         })
   }
-
 
   
   const addTodo = async () => {

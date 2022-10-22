@@ -15,10 +15,10 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        // connect to mysql with connection string from app settings
+        // connect to mysql with connection string from appsettings.json
         var connectionString = Configuration.GetConnectionString("Default");
         options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 
-    public DbSet<Todo> Todos { get; set; }
+    public DbSet<Todo>? Todos { get; set; }
 }
