@@ -11,8 +11,8 @@ using todolist.Helpers;
 namespace todolist.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221017102003_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221022010013_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,13 +30,15 @@ namespace todolist.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Todos");
                 });
 #pragma warning restore 612, 618
         }

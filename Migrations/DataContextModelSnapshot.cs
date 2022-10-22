@@ -32,7 +32,6 @@ namespace todolist.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
