@@ -8,6 +8,7 @@ button{
 
 .todo-form{
     padding-bottom: 50px;
+
 }
 
 .text{
@@ -22,7 +23,7 @@ button{
 }
 
 button{
-    height: 50px;
+    height: 52px;
 }
 
 .form-container{
@@ -30,22 +31,49 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     input{
-        height: 50px;
+        height: 52px;
     }
     .btn{
-        margin-left: 10px;
         padding: 1px 10px;
         outline: 1px solid #ccc;
     }
 }
 
-.react-datetime-picker__wrapper{
-    margin-left: 10px;
+.datetime-input{
+    width: 180px;
     border: none;
-    border-radius: 0.25rem;
     outline: 1px solid #ccc;
-    align-items: center;
+    border-radius: 0.25rem;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.react-datetime-picker__wrapper{
+    border: none;
+    .react-datetime-picker__inputGroup{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.checkbox-field {
+    outline: 1px solid #ccc;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 5px;
+    input{
+        margin-top: 4px;
+        height: 13px;
+    }
+    label{
+        line-height: 1;
+        text-align: center;
+        font-size: 10px;
+    }
 }

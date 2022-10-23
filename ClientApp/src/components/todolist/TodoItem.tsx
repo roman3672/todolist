@@ -1,10 +1,19 @@
 import React, {useRef, useState} from 'react'
 import '../../styles/todoitem.scss'
 import {ITodoItem} from "../../interfaces";
+import DateTimePicker from "react-datetime-picker";
 
-const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo}: ITodoItem) => {
+const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo, handleError}: ITodoItem) => {
+
+    // Избавляюсь от разницы во времени с GMT
+    const actualHours = new Date(dueDate).getHours() - (new Date(dueDate).getTimezoneOffset() / 60)
+    const actualTimeStamp = new Date(dueDate).setHours(actualHours)
+
+    const actualDate = new Date(actualTimeStamp)
+    const actualDateString = new Date(actualTimeStamp).toLocaleString().slice(0, 17);
     
     const [itemTitle, setItemTitle] = useState<string>(title)
+    const [itemDueDate, setItemDueDate] = useState<Date>(actualDate)
     
     const [editMode, setEditMode] = useState(false)
     
@@ -30,16 +39,21 @@ const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo}: 
     }
     
     const applyChanges = async () => {
-        handleEdit()
-        setItemTitle(itemTitle)
-        editTodo(id, itemTitle)
+        if(itemTitle === ''){
+            handleError?.('Title is empty!')
+        } else {
+            if(new Date() > itemDueDate){
+                handleError?.('Due date is in the past!')
+            } else{
+                handleEdit()
+                setItemTitle(itemTitle)
+                const stringToDate = new Date(itemDueDate)
+                editTodo(id, itemTitle, stringToDate)
+            }
+        }
     }
     
-    // Избавляюсь от разницы во времени с GMT
-    const actualHours = new Date(dueDate).getHours() - (new Date(dueDate).getTimezoneOffset() / 60)
-    const actualTimeStamp = new Date(dueDate).setHours(actualHours)
     
-    const actualDate = new Date(actualTimeStamp).toLocaleString().slice(0, 17);
     
     if(!isDone){
         return (
@@ -51,14 +65,14 @@ const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo}: 
                 
                 {editMode
                     ? <div className="buttons">
-                        <p>Due to: <span>{actualDate}</span></p>
+                        <DateTimePicker className='datetime-input' value={actualDate} onChange={(value) => setItemDueDate(value)} disableClock={true} disableCalendar={true} clearIcon={null} />
                         <div className='edit-buttons'>
                                 <button className='btn btn-outline-warning' onClick={() => handleEdit()}><i className="bi bi-x-lg"></i></button>
                                 <button className='btn btn-success' onClick={() => applyChanges()}>Apply</button>
                             </div>
                     </div>
                     : <div className="buttons">
-                        <p>Due to: <span>{actualDate}</span></p>
+                        <p>Due to: <span>{actualDateString}</span></p>
                         <button className='btn btn-outline-success' onClick={() => markTodo(id)}><i className="bi bi-check-lg"></i></button>
                         <button className='btn btn-outline-warning' onClick={() => handleEdit()}><i className="bi bi-pencil"></i></button>
                         <button className='btn btn-outline-danger' onClick={() => removeTodo(id)}><i className="bi bi-trash"></i></button>
@@ -72,7 +86,7 @@ const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo}: 
             <div className='todo-item todo-item_done' ref={todoElement}>
                 <input className='title' type='text' readOnly value={title} />
                 <div className="buttons">
-                    {isDone && <p>This is complete! Well done!</p>}
+                    {isDone && <p>This is completed! Well done!</p>}
                     <button className='btn btn-outline-danger' onClick={() => removeTodo(id)}><i className="bi bi-trash"></i></button>
                 </div>
             </div>

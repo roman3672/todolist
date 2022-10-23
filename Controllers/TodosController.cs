@@ -51,6 +51,7 @@ namespace todolist.Controllers{
             {
                 selectedTodo.Title = todo.Title;
                 selectedTodo.IsDone = todo.IsDone;
+                selectedTodo.DueDate = todo.DueDate;
                 
                 await _dbContext.SaveChangesAsync();
                 return Ok(await _dbContext.Todos.ToListAsync());

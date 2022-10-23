@@ -22,5 +22,6 @@ export interface ITodoItem{
     dueDate: Date,
     removeTodo: (id: number | undefined) => void,
     markTodo: (id?: number) => void,
-    editTodo: (id?: number, title?: string) => void,
+    editTodo: (id?: number, title?: string, dueDate?: Date) => void,
+    handleError?: (message: string) => void
 }

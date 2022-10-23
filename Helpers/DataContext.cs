@@ -20,5 +20,5 @@ public class DataContext : DbContext
         options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 
-    public DbSet<Todo>? Todos { get; set; }
+    public DbSet<Todo> Todos { get; set; }
 }

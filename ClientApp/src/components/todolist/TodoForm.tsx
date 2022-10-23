@@ -5,12 +5,13 @@ import '../../styles/todoform.scss'
 
 
 const TodoForm = ({title, setTitle, dueDate, setDueDate, addTodo}: ITodoForm) => {
- 
-  return (
+    
+    
+    return (
     <div className='todo-form'>
         <div className='form-container'>
             <input className='text form-control' type="text" placeholder='Type in your Todo here' value={title} onChange={(e) => setTitle(e.target.value)} />
-            <DateTimePicker className='' value={dueDate} onChange={(value) => setDueDate(value)} disableClock={true} />
+            <DateTimePicker className='datetime-input' value={dueDate} onChange={(value) => setDueDate(value)} disableClock={true} clearIcon={null} />
             <button className='btn btn-outline-success' onClick={addTodo}>Add Todo</button>
         </div>
     </div>
