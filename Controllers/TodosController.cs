@@ -17,9 +17,11 @@ namespace todolist.Controllers{
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTodos()
+        public async Task<IActionResult> GetTodos(string? searchingString)
         {
-            return Ok(await _dbContext.Todos.ToListAsync());
+            if(String.IsNullOrEmpty(searchingString))  return Ok(await _dbContext.Todos.ToListAsync());
+            var result = await _dbContext.Todos.Where(data => data.Title.Contains(searchingString)).ToListAsync();
+            return Ok(result);
         }
 
         [HttpGet]

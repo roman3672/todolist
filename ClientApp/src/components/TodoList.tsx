@@ -15,6 +15,7 @@ const TodoList = () => {
   const [loader, setLoader] = useState<boolean>(false)
   const [popupError, setPopupError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [searchingString, setSearchingString] = useState<string>('')
   
   const handleError = (message: string) => {
     setPopupError(true)
@@ -33,7 +34,7 @@ const TodoList = () => {
   
   const fetchTodos = async () => {
     setLoader(true)
-    await axios.get('https://localhost:7120/api/Todos')
+    await axios.get('https://localhost:7120/api/Todos', {params: {searchingString: searchingString}})
         .then(res => {
           const sortedTodos = [...res.data].sort((a, b) => Number(a.isDone) - Number(b.isDone))
           setTodos(sortedTodos)
@@ -59,6 +60,7 @@ const TodoList = () => {
             'https://localhost:7120/api/Todos',
             newTodo
         ).then(() => {
+          setSearchingString('')
           fetchTodos()
         })
       }
@@ -70,6 +72,7 @@ const TodoList = () => {
         `https://localhost:7120/api/Todos/mark/${id}`,
         {isDone: true}
     ).then(() => {
+      setSearchingString('')
       fetchTodos()
     })
   }
@@ -79,6 +82,7 @@ const TodoList = () => {
         `https://localhost:7120/api/Todos/edit/${id}`,
         {title: title, dueDate: dueDate}
     ).then(() => {
+      setSearchingString('')
       fetchTodos()
     })
   }
@@ -87,9 +91,18 @@ const TodoList = () => {
     await axios.delete<ITodo>(
         `https://localhost:7120/api/Todos/${id}`
     ).then(() => {
+      setSearchingString('')
       fetchTodos()
     })
   }
+  
+  // Handling search
+  useEffect(() => {
+    console.log(searchingString)
+    fetchTodos()
+  }, [searchingString])
+  
+  
 
   
   return (
@@ -97,6 +110,8 @@ const TodoList = () => {
       {popupError && <PopupError message={errorMessage} setPopupError={setPopupError} />}
       <Container className='todolist-container'>
         <TodoForm title={title} setTitle={setTitle} dueDate={dueDate} setDueDate={setDueDate} addTodo={addTodo} />
+       
+          <input type="text" className="form-control search-input" placeholder="Search..." aria-describedby="basic-addon2" value={searchingString} onChange={(e) => setSearchingString(e.target.value)} />
         {todos.length === 0 && <h3 className='todolist-empty'>You don't have any Todos yet!</h3>}
         <div className="todolist-actual">
           {todos.map((e, i) => {
