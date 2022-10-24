@@ -68,7 +68,7 @@ const TodoItem = ({id, title, isDone, dueDate, removeTodo, markTodo, editTodo, h
                         <DateTimePicker className='datetime-input' value={actualDate} onChange={(value) => setItemDueDate(value)} disableClock={true} disableCalendar={true} clearIcon={null} />
                         <div className='edit-buttons'>
                                 <button className='btn btn-outline-warning' onClick={() => handleEdit()}><i className="bi bi-x-lg"></i></button>
-                                <button className='btn btn-success' onClick={() => applyChanges()}>Apply</button>
+                                <button className='btn btn-success btn_apply' onClick={() => applyChanges()}>Apply</button>
                             </div>
                     </div>
                     : <div className="buttons">

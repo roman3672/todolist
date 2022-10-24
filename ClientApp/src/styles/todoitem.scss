@@ -1,3 +1,5 @@
+@import "abstracts/mediaqueries";
+
 .todo-item{
     width: 90%;
     margin: 10px auto;
@@ -8,6 +10,17 @@
     align-items: center;
     padding: 0 15px;
     justify-content: space-between;
+
+    @include respond(768){
+        padding: 0 5px;
+        height: 34px;
+    }
+    @include respond(600){
+        flex-wrap: wrap;
+        height: 100%;
+        padding: 5px;
+    }
+    
     &_edit{
         background: rgba(245, 245, 245, 0.64);
     }
@@ -25,13 +38,28 @@
     height: 90%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    @include respond(600){
+        margin-top: 6px;
+        width: 100%;
+    }
     
     p{
         padding-right: 10px;
         text-align: left;
         font-size: 14px;
+        @include respond(768){
+            font-size: 10px;
+        }
+        @include respond(600){
+            width: 78%;
+        }
         span{
             font-weight: 600;
+            @include respond(768){
+                font-size: 12px;
+            }
         }
     }
     
@@ -40,6 +68,20 @@
         height: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        @include respond(768){
+            height: 30px;
+            padding: 0;
+            width: 30px;
+            margin: 0 2px;
+        }
+        
+        &_apply{
+            @include respond(768){
+                width: max-content;
+                padding: 0 3px;
+            }
+        }
     }
     
     .datetime-input{
@@ -47,17 +89,36 @@
         height: 34px;
         align-items: center;
         width: max-content;
+        @include respond(768){
+            padding: 0;
+            height: 30px;
+        }
+        input, span {
+            @include respond(768){
+                font-size: 14px;
+            }
+        }
     }
 }
 
 .title{
     border: none;
     outline: none;
-    padding: 5px 6px; 
+    padding: 5px 6px;
+    @include respond(600){
+        width: 100%;
+    }
     &_edit{
         width: max-content;
         outline: 1px solid #ccc;
         border-radius: 0.25rem;
+        height: 34px;
+        @include respond(768){
+            height: 30px;
+        }
+        @include respond(600){
+            width: 100%;
+        }
         &:focus{
             outline: 1px solid blue;
             border-radius: 0.25rem;

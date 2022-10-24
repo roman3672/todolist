@@ -1,7 +1,12 @@
-﻿a.navbar-brand {
+﻿@import "abstracts/mediaqueries";
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  @include respond(600){
+      width: 100%;
+  }
 }
 
 html {
